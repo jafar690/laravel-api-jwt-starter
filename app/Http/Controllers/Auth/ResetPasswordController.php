@@ -2,38 +2,76 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
+use Config;
+use App\User;
+use Tymon\JWTAuth\JWTAuth;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Support\Facades\Password;
+use App\Http\Controllers\Requests\ResetPasswordRequest;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ResetPasswordController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Password Reset Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller is responsible for handling password reset requests
-    | and uses a simple trait to include this behavior. You're free to
-    | explore this trait and override any methods you wish to tweak.
-    |
-    */
+    public function resetPassword(ResetPasswordRequest $request, JWTAuth $JWTAuth)
+    {
+        $response = $this->broker()->reset(
+            $this->credentials($request), function ($user, $password) {
+                $this->reset($user, $password);
+            }
+        );
 
-    use ResetsPasswords;
+        if($response !== Password::PASSWORD_RESET) {
+            throw new HttpException(500);
+        }
+
+        if(!Config::get('boilerplate.reset_password.release_token')) {
+            return response()->json([
+                'status' => 'ok',
+            ]);
+        }
+
+        $user = User::where('email', '=', $request->get('email'))->first();
+
+        return response()->json([
+            'status' => 'ok',
+            'token' => $JWTAuth->fromUser($user)
+        ]);
+    }
 
     /**
-     * Where to redirect users after resetting their password.
+     * Get the broker to be used during password reset.
      *
-     * @var string
+     * @return \Illuminate\Contracts\Auth\PasswordBroker
      */
-    protected $redirectTo = '/home';
+    public function broker()
+    {
+        return Password::broker();
+    }
 
     /**
-     * Create a new controller instance.
+     * Get the password reset credentials from the request.
      *
+     * @param  ResetPasswordRequest  $request
+     * @return array
+     */
+    protected function credentials(ResetPasswordRequest $request)
+    {
+        return $request->only(
+            'email', 'password', 'password_confirmation', 'token'
+        );
+    }
+
+    /**
+     * Reset the given user's password.
+     *
+     * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
+     * @param  string  $password
      * @return void
      */
-    public function __construct()
+    protected function reset($user, $password)
     {
-        $this->middleware('guest');
+        $user->password = $password;
+        $user->save();
     }
 }
