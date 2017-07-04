@@ -25,7 +25,7 @@ class ResetPasswordController extends Controller
             throw new HttpException(500);
         }
 
-        if(!Config::get('boilerplate.reset_password.release_token')) {
+        if(!Config::get('api.reset_password.release_token')) {
             return response()->json([
                 'status' => 'ok',
             ]);

@@ -189,6 +189,37 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Extra Option / Signup Release Token
+    |--------------------------------------------------------------------------
+    |This is a custom added option.
+    | Set to true if you want the jwt token to be realesed after registration.
+    | 
+    |
+    */
+   
+    'sign_up' => [
+    
+        'release_token' => env('SIGN_UP_RELEASE_TOKEN'),
+    ],
+
+        /*
+    |--------------------------------------------------------------------------
+    | Extra Option / reset password Release Token
+    |--------------------------------------------------------------------------
+    | This is a custom added option.
+    | Set to true if you want the jwt token to be realesed after a password reset.
+    | 
+    |
+    */
+   
+    'reset_password' => [
+    
+        'release_token' => env('PASSWORD_RESET_RELEASE_TOKEN', false),
+    ],
+
+
+    /*
+    |--------------------------------------------------------------------------
     | Response Transformer
     |--------------------------------------------------------------------------
     |

@@ -18,7 +18,7 @@ class RegisterController extends Controller
             throw new HttpException(500);
         }
 
-        if(!Config::get('boilerplate.sign_up.release_token')) {
+        if(!Config::get('api.sign_up.release_token')) {
             return response()->json([
                 'status' => 'ok'
             ], 201);

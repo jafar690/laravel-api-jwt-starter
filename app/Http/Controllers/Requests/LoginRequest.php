@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Requests;
 
-use Config;
 use Dingo\Api\Http\FormRequest;
 
 class LoginRequest extends FormRequest
 {
     public function rules()
     {
-        return Config::get('boilerplate.login.validation_rules');
+        return [
+            'email' => 'required|email',
+            'password' => 'required'
+        ];
     }
 
     public function authorize()
