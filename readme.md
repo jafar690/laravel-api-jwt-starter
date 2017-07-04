@@ -1,15 +1,9 @@
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
-<p align="center">
-<a href="https://travis-ci.org/jafar690/laravel-api-jwt-starter"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/jafar690/laravel-api-jwt-starter"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/jafar690/laravel-api-jwt-starter"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/jafar690/laravel-api-jwt-starter"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
 
-## Laravel API Boilerplate (JWT Edition)
+## Laravel API JWT Starter
 
-Laravel API Boilerplate is a "starter kit" you can use to build your first API in seconds. As you can easily imagine, it is built on top of the awesome Laravel Framework. This version is built on Laravel 5.4!
+Laravel API JWT Starter is a "starter kit" you can use to build your first API in seconds. It is based on larave 5.4!
 
 It is built on top of three packages:
 
@@ -44,9 +38,9 @@ For each controller there's an already setup route in `routes/api.php` file:
 
 All the API routes can be found in the `routes/api.php` file. This also follow the Laravel 5.3 convention.
 
-### Secrets Generation
+### On create project commands
 
-Every time you create a new project starting from this repository, the _php artisan jwt:generate_ command will be executed.
+Every time you create a new project starting from this repository,the `php artisan jwt:generate` command will be executed.
 
 ## Configuration
 
