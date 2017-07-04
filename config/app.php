@@ -170,6 +170,7 @@ return [
         Laravel\Tinker\TinkerServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        Dingo\Api\Provider\LaravelServiceProvider::class,
 
         /*
          * Application Service Providers...
