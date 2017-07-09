@@ -15,7 +15,7 @@ What I made is an integration of these three packages and a setup of some authen
 
 ## Installation
 
-1. run `composer create-project jafar690/laravel-api-jwt-starter`;
+1. run `composer create-project jafar690/laravel-api-jwt-starter yourProjectName`;
 2. have a coffee, nothing to do here;
 
 Once the project creation procedure will be completed, run the `php artisan migrate` command to install the required tables.
